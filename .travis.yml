@@ -1,0 +1,32 @@
+---
+sudo: required
+language: python
+services:
+  - docker
+before_install:
+  - sudo apt-get -qq update
+env:
+  global:
+    - ROLE_NAME: bonita_dev
+  matrix:
+    - MOLECULE_DISTRO: 'ubuntu:18.04'
+
+install:
+  # Install test dependencies.
+  - pip install molecule
+  - pip install 'molecule[docker]'
+
+before_script:
+  # Use actual Ansible Galaxy role name for the project directory.
+  - cd ../
+  - mv ansible_role_$ROLE_NAME $ROLE_NAME
+  - cd $ROLE_NAME
+
+script:
+  - ansible --version
+  - molecule --version
+  # Run tests.
+  - molecule test
+
+#notifications:
+#  webhooks: https://galaxy.ansible.com/api/v1/notifications/
