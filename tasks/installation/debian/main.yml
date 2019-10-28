@@ -29,13 +29,6 @@
   when: true
   tags: [ installation ]
 
-- name: debian | Pull current configuration for next starts
-  shell: "nohup {{ bonita_install_dir }}/setup/setup.sh pull ;"
-  args:
-    chdir: "{{ bonita_install_dir }}"
-  when: true
-  tags: [ installation ]
-
 - name:  debian | wait for bonita server to start
   uri:
     url: "http://localhost:8080"

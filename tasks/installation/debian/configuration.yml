@@ -1,72 +1,94 @@
 ---
 # tasks file for bonita_dev
 
-- name: debian | Check if current configuration exists.
+# -- Check non first run
+
+- name: debian | Check if initialized marker file exists.
   stat:
-    path: "{{ bonita_install_dir }}/setup/platform_conf/current"
-  register: current_conf
+    path: "{{ bonita_initialized_marker_file }}"
+  register: initialized
+
+- name: debian | Mark first run with file
+  file:
+    path: "{{ bonita_initialized_marker_file }}"
+    state: touch
 
 - name: set fact non_first_run
   set_fact:
-    non_first_run={{ current_conf.stat.exists and current_conf.stat.isdir }}
+    non_first_run={{ initialized.stat.exists }}
 
 # -- First run case
-- name: debian | Configure admin username
+- name: debian | Configure admin username (initial conf)
   replace:
     path: "{{ bonita_install_dir }}/setup/platform_conf/initial/tenant_template_engine/bonita-tenant-community-custom.properties"
     regexp: '^#userName=.*$'
     replace: 'userName=Install'
-  when: not non_first_run
-- name: debian | Configure admin password
+- name: debian | Configure admin password (initial conf)
   replace:
     path: "{{ bonita_install_dir }}/setup/platform_conf/initial/tenant_template_engine/bonita-tenant-community-custom.properties"
     regexp: '^#userPassword=.*$'
     replace: "userPassword={{ tenant_admin_password }}"
-  when: not non_first_run
 
-- name: debian | Configure admin default username
+- name: debian | Configure admin default username (initial conf)
   replace:
     path: "{{ bonita_install_dir }}/setup/platform_conf/initial/platform_portal/platform-tenant-config.properties"
     regexp: '^platform\.tenant\.default\.username=.*$'
     replace: 'platform.tenant.default.username=Install'
-  when: not non_first_run
-- name: debian | Configure admin default password
+- name: debian | Configure admin default password (initial conf)
   replace:
     path: "{{ bonita_install_dir }}/setup/platform_conf/initial/platform_portal/platform-tenant-config.properties"
     regexp: '^platform\.tenant\.default\.password=.*$'
     replace: "platform.tenant.default.password={{ tenant_admin_password }}"
-  when: not non_first_run
 
 # -- Non first run case
-- name: debian | Configure admin username
+
+- name: debian | Pull current configuration before editing
+  command: "{{ bonita_install_dir }}/setup/setup.sh pull"
+  args:
+    chdir: "{{ bonita_install_dir }}"
+  when: non_first_run
+
+- name: debian | Configure admin username (current conf)
   replace:
     path: "{{ bonita_install_dir }}/setup/platform_conf/current/tenant_template_engine/bonita-tenant-community-custom.properties"
-    regexp: '^#userName=.*$'
+    regexp: '^userName=.*$'
     replace: 'userName=Install'
   when: non_first_run
-- name: debian | Configure admin password
+- name: debian | Configure admin password (current conf)
   replace:
     path: "{{ bonita_install_dir }}/setup/platform_conf/current/tenant_template_engine/bonita-tenant-community-custom.properties"
-    regexp: '^#userPassword=.*$'
+    regexp: '^userPassword=.*$'
     replace: "userPassword={{ tenant_admin_password }}"
   when: non_first_run
 
-- name: debian | Configure admin default username
+- name: debian | Configure admin 1 username (current conf)
+  replace:
+    path: "{{ bonita_install_dir }}/setup/platform_conf/current/tenants/1/tenant_engine/bonita-tenant-community-custom.properties"
+    regexp: '^userName=.*$'
+    replace: 'userName=Install'
+  when: non_first_run
+- name: debian | Configure admin 1 password (current conf)
+  replace:
+    path: "{{ bonita_install_dir }}/setup/platform_conf/current/tenants/1/tenant_engine/bonita-tenant-community-custom.properties"
+    regexp: '^userPassword=.*$'
+    replace: "userPassword={{ tenant_admin_password }}"
+  when: non_first_run
+
+- name: debian | Configure admin default username (current conf)
   replace:
     path: "{{ bonita_install_dir }}/setup/platform_conf/current/platform_portal/platform-tenant-config.properties"
     regexp: '^platform\.tenant\.default\.username=.*$'
     replace: 'platform.tenant.default.username=Install'
   when: non_first_run
-- name: debian | Configure admin default password
+- name: debian | Configure admin default password (current conf)
   replace:
     path: "{{ bonita_install_dir }}/setup/platform_conf/current/platform_portal/platform-tenant-config.properties"
     regexp: '^platform\.tenant\.default\.password=.*$'
     replace: "platform.tenant.default.password={{ tenant_admin_password }}"
   when: non_first_run
 
-#- name: debian | Push current configuration
-#  shell: "nohup {{ bonita_install_dir }}/setup/setup.sh push ;"
-#  args:
-#    chdir: "{{ bonita_install_dir }}"
-#  when: non_first_run
-#  tags: [ installation ]
+- name: debian | Push new configuration
+  command: "{{ bonita_install_dir }}/setup/setup.sh push"
+  args:
+    chdir: "{{ bonita_install_dir }}"
+  when: non_first_run

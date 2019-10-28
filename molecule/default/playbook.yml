@@ -5,7 +5,51 @@
 
     - role: geerlingguy.java
       when: "ansible_os_family == 'Debian'"
+      become: yes
       java_packages:
         - openjdk-11-jdk
 
     - role: bonita_dev
+
+  post_tasks:
+
+    # curl -v -c saved_cookies.txt -X POST --url 'http://localhost:8080/bonita/loginservice' --header 'Content-Type: application/x-www-form-urlencoded; charset=utf-8' -O /dev/null -d 'username=Install&password=UG8e3vUmH5&redirect=false&redirectURL='
+    - name: Try login with generated password, then use the returned cookie to access the app
+      uri:
+        url: http://localhost:8080/bonita/loginservice
+        method: POST
+        body_format: form-urlencoded
+        body:
+          username: "Install"
+          password: "{{ tenant_admin_password }}"
+          redirect: false
+          redirectURL: "'"
+        status_code: 302
+      register: login
+      changed_when: false
+      tags: [ test ]
+
+    - name: Debug login
+      debug:
+        var: login
+      tags: [ test, debug ]
+
+    - name: "Assert X-Bonita-API-Token was returned"
+      fail:
+        msg: "Bonita 'X-Bonita-API-Token' header not found in response"
+      when: "'X-Bonita-API-Token' not in login.set_cookie"
+      tags: [ test ]
+
+  # Bug in uri module ?? cookie is not fully extracted, the jsessionid is missing.
+  # # curl -b saved_cookies.txt -X GET --url 'http://localhost:8080/bonita/API/system/session/unusedId'
+  # - name: Try list installed user definition.
+  #   uri:
+  #     url: http://localhost:8080/bonita/API/system/session/unusedId
+  #     method: GET
+  #     return_content: yes
+  #     headers:
+  #       X-Bonita-API-Token: "{{ login.set_cookie.split('=')[1].split(';')[0] }}"
+  #       Cookie: "{{ login.set_cookie }}"
+  #     status_code: 200
+  #   changed_when: false
+  #   tags: [ test ]

@@ -38,7 +38,6 @@ Role Variables
 
 - **bonita_home_dir**: "~/bonita"
 - **bonita_required_packages**:  ['unzip']
-- **bonita_java_package**:  'openjdk-11-jre-headless'
 
 Playbooks
 ---------

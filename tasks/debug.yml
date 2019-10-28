@@ -16,8 +16,8 @@
     - bonita_bundle
     - bonita_home_dir
     - bonita_install_dir
+    - bonita_initialized_marker_file
     - bonita_required_packages
-    - bonita_java_package
     - smtp.host
     - smtp.port
     - smtp.username

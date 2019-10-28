@@ -1,2 +1,5 @@
 ---
 # vars file for bonita_dev
+
+bonita_initialized_marker_file: "{{ bonita_install_dir }}/initialized"
+bonita_install_dir: "{{ bonita_home_dir }}/BonitaCommunity-{{ bonita_version }}-tomcat"
