@@ -9,7 +9,9 @@ env:
   global:
     - ROLE_NAME: bonita_dev
   matrix:
-    - MOLECULE_DISTRO: 'ubuntu:18.04'
+    - MOLECULE_DISTRO: 'ubuntu1804'
+    - MOLECULE_DISTRO: 'ubuntu1604'
+    - MOLECULE_DISTRO: 'ubuntu1404'
 
 install:
   # Install test dependencies.
