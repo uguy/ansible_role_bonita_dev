@@ -1,14 +1,16 @@
+![bonitasoft](https://community.bonitasoft.com/sites/community/files/logo_community_0.png) 
+
 bonita_dev
 ==========
 
-[![License](https://img.shields.io/github/license/uguy/ansible_role_bonita_dev?style=plastic)](https://raw.githubusercontent.com/uguy/ansible-role-bonita_dev/master/LICENSE)
+[![License](https://img.shields.io/github/license/uguy/ansible_role_bonita_dev?style=plastic)](https://raw.githubusercontent.com/uguy/ansible_role_bonita_dev/master/LICENSE)
 [![Build Status](https://api.travis-ci.com/uguy/ansible_role_bonita_dev.svg?branch=master)](https://travis-ci.com/uguy/ansible_role_bonita_dev)
 
 An [Ansible](http://www.ansible.com) role to setup [Bonita Community server](https://fr.bonitasoft.com/telechargez) on a developer box.
 
-Bonita server is installed in the user home directory as default. A new tenant password is randomly generated on each run and the user is notify by an email providing the new tenant password.
+Bonita server is installed in the user's home directory as default. A new tenant password is randomly generated on each run and the user is notified by an email providing the new tenant password.
 
-> This purpose of this repo is to play with ansible, molecule and Bonita BPM community server, thus not for production use.
+> This purpose of this repo is to play with ansible, molecule and Bonita BPM community server, thus not for production use :innocent:
 
 Requirements
 ------------
