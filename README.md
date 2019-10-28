@@ -4,7 +4,7 @@ bonita_dev
 [![License](https://img.shields.io/github/license/uguy/ansible_role_bonita_dev?style=plastic)](https://raw.githubusercontent.com/uguy/ansible-role-bonita_dev/master/LICENSE)
 [![Build Status](https://api.travis-ci.com/uguy/ansible_role_bonita_dev.svg?branch=master)](https://travis-ci.com/uguy/ansible_role_bonita_dev)
 
-An [Ansible](http://www.ansible.com) role to setup Bonita Community server on a developer box.
+An [Ansible](http://www.ansible.com) role to setup [Bonita Community server](https://fr.bonitasoft.com/telechargez) on a developer box.
 
 Bonita server is installed in the user home directory as default. A new tenant password is randomly generated on each run and the user is notify by an email providing the new tenant password.
 
@@ -14,6 +14,7 @@ Requirements
 ------------
 
 - ansible >= 2.x
+- Requires at least Java 8. See [`geerlingguy.java`](https://github.com/geerlingguy/ansible-role-java#example-playbook-install-openjdk-8) role instructions for installing OpenJDK 8.
 
 Facts
 -----
