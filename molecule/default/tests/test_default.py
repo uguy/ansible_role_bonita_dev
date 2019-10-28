@@ -7,11 +7,11 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 ).get_hosts('all')
 
 
-def test_bonita_home_dir(host):
-    f = host.file('~/bonita')
-    assert f.exists
-
-
 def test_java_installed(host):
     java_version = host.run('java -version')
     assert java_version.rc == 0
+
+
+# def test_bonita_home_dir(host):
+#     f = host.file('~/bonita')
+#     assert f.exists
