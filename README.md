@@ -8,6 +8,10 @@ bonita_dev
 
 An [Ansible](http://www.ansible.com) role to setup Bonita Community server on a developer box.
 
+Bonita server is installed in the user home directory as default. A new tenant password is randomly generated on each run and the user is notify by an email providing the new tenant password.
+
+> This purpose of this repo is to play with ansible, molecule and Bonita BPM community server, thus not for production use.
+
 Requirements
 ------------
 
@@ -60,6 +64,9 @@ molecule test
 | Family | Distribution | Version | Test Status |
 |:-:|:-:|:-:|:-:|
 | Debian | Ubuntu  | Bionic    | [![x86_64](http://img.shields.io/badge/x86_64-passed-006400.svg?style=flat)](x) |
+| Debian | Ubuntu  | Xenial    | [![x86_64](http://img.shields.io/badge/x86_64-passed-006400.svg?style=flat)](x) |
+| Debian | Debian  | Buster    | [![x86_64](http://img.shields.io/badge/x86_64-passed-006400.svg?style=flat)](x) |
+| Debian | Debian  | Stretch   | [![x86_64](http://img.shields.io/badge/x86_64-passed-006400.svg?style=flat)](x) |
 
 License
 -------
