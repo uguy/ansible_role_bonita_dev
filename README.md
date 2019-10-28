@@ -2,7 +2,7 @@ bonita_dev
 ==========
 
 [![License](https://img.shields.io/github/license/uguy/ansible_role_bonita_dev?style=plastic)](https://raw.githubusercontent.com/uguy/ansible-role-bonita_dev/master/LICENSE)
-[![Build Status](https://travis-ci.org/uguy/ansible_role_bonita_dev.svg?branch=master)](https://travis-ci.org/uguy/ansible_role_bonita_dev)
+[![Build Status](https://api.travis-ci.com/uguy/ansible_role_bonita_dev.svg?branch=master)](https://travis-ci.com/uguy/ansible_role_bonita_dev)
 
 [![Platform](http://img.shields.io/badge/platform-ubuntu-dd4814.svg?style=plastic)](Ubuntu)
 
