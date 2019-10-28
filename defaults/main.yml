@@ -1,2 +1,5 @@
 ---
 # defaults file for bonita_dev
+
+bonita_version: 7.9.4
+bonita_repo_url: "https://release.ow2.org/bonita"

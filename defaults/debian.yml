@@ -1,0 +1,8 @@
+---
+# defaults file for bonita_dev debian
+
+bonita_bundle: "BonitaCommunity-{{ bonita_version }}-tomcat.zip"
+bonita_home_dir: "~/bonita"
+bonita_install_dir: "{{ bonita_home_dir }}/BonitaCommunity-{{ bonita_version }}-tomcat"
+bonita_required_packages:  ['unzip']
+bonita_java_package:  'openjdk-11-jre-headless'

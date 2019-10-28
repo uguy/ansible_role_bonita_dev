@@ -1,0 +1,47 @@
+---
+# tasks file for bonita_dev
+
+- name: debian | Install dependencies
+  include: dependencies.yml
+  tags: [ installation ]
+
+- name: debian | Install bonita server
+  include: install.yml
+  tags: [ installation ]
+
+- name: debian | Configure bonita server
+  include: configuration.yml
+  tags: [ configuration ]
+
+- name: debian | Stop bonita server before start if not first run
+  shell: "nohup {{ bonita_install_dir }}/stop-bonita.sh ;"
+  args:
+    chdir: "{{ bonita_install_dir }}"
+    #creates: "{{ bonita_install_dir }}/server/catalina.pid"
+  tags: [ installation ]
+  when: non_first_run # from configuration.yml
+
+- name: debian | Start bonita server
+  shell: "nohup {{ bonita_install_dir }}/start-bonita.sh -Dh2.noconfirm ;"
+  args:
+    chdir: "{{ bonita_install_dir }}"
+    #creates: "{{ bonita_install_dir }}/server/catalina.pid"
+  when: true
+  tags: [ installation ]
+
+- name: debian | Pull current configuration for next starts
+  shell: "nohup {{ bonita_install_dir }}/setup/setup.sh pull ;"
+  args:
+    chdir: "{{ bonita_install_dir }}"
+  when: true
+  tags: [ installation ]
+
+- name:  debian | wait for bonita server to start
+  uri:
+    url: "http://localhost:8080"
+    status_code: 200
+  register: result
+  until: result is succeeded
+  retries: 6
+  delay: 20
+  tags: [ installation ]

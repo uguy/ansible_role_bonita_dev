@@ -1,0 +1,20 @@
+---
+# tasks file for bonita_dev
+
+- name: debian | Create bonita install directory if it does not exist
+  file:
+    path: "{{ bonita_home_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: debian | Download bonita comunity
+  get_url:
+    url: "{{ bonita_repo_url }}/{{ bonita_bundle }}"
+    dest: "{{ bonita_home_dir }}/{{ bonita_bundle }}"
+
+- name: debian | Extract bonita archive
+  unarchive:
+    dest: "{{ bonita_home_dir }}"
+    src: "{{ bonita_home_dir }}/{{ bonita_bundle }}"
+    creates: "{{ bonita_home_dir }}/BonitaCommunity-{{ bonita_version }}-tomcat"
+    copy: no

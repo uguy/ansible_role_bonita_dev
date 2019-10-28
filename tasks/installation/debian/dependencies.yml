@@ -1,0 +1,15 @@
+---
+# tasks file for bonita_dev
+
+- name: debian | Install some basic dependencies
+  apt:
+    name: "{{ bonita_required_packages }}"
+    state: present
+  become: yes
+
+- name: debian | Install Java if not present
+  apt:
+    name: "{{ bonita_java_package }}"
+    state: present
+  become: yes
+  when: not java_installed

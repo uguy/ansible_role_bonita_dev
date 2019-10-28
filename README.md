@@ -16,8 +16,24 @@ Requirements
 Facts
 -----
 
+- **java_installed**: fact set by this role that contains a flag that indicates if Java is installed on the host.
+- **java_version_installed**: fact set by this role that contains the string of the Java version installed in the system.
+- **tenant_admin_password**: fact set by this role that contains the string of the randomly generated password for the tenant user `Install` (generated each run).
+
 Role Variables
 --------------
+
+- **debug**: flag to make role more verbose.
+- **bonita_version**: 7.9.4
+- **bonita_repo_url**: "https://release.ow2.org/bonita"
+
+### Debian/Ubuntu
+
+- **bonita_bundle**: "BonitaCommunity-{{ bonita_version }}-tomcat.zip"
+- **bonita_home_dir**: "~/bonita"
+- **bonita_install_dir**: "{{ bonita_home_dir }}/BonitaCommunity-{{ bonita_version }}-tomcat"
+- **bonita_required_packages**:  ['unzip']
+- **bonita_java_package**:  'openjdk-11-jre-headless'
 
 Playbooks
 ---------

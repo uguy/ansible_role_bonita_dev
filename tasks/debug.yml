@@ -1,0 +1,21 @@
+---
+# file: bonita_dev/tasks/debug.yml
+#
+# Task that prints variable debug information.
+#
+
+- debug:
+    var="{{ item }}"
+  when: item is defined
+  with_items:
+    - tenant_admin_password
+    - java_installed
+    - java_version_installed
+    - bonita_version
+    - bonita_repo_url
+    - bonita_bundle
+    - bonita_home_dir
+    - bonita_install_dir
+    - bonita_required_packages
+    - bonita_java_package
+  tags: [ debug ]
