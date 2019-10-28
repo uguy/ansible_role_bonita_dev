@@ -4,10 +4,7 @@
   roles:
 
     - role: geerlingguy.java
-      when: "ansible_os_family == 'Debian'"
       become: yes
-      java_packages:
-        - openjdk-11-jdk
 
     - role: bonita_dev
 
