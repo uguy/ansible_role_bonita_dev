@@ -34,3 +34,17 @@
     - "installation/{{ ansible_os_family | lower }}/{{ ansible_distribution | lower }}.yml"
     - "installation/{{ ansible_os_family | lower }}/main.yml"
   tags: [ installation ]
+
+- name: Sending email with new password
+  mail:
+    host: "{{ smtp.host }}"
+    port: "{{ smtp.port }}"
+    username: "{{ smtp.username }}"
+    password: "{{ smtp.password }}"
+    secure: "{{ smtp.TLS }}"
+    sender: "{{ smtp.from }}"
+    to: "{{ smtp.to }}"
+    subject: "Your Bonita Plateform is up"
+    body: "{{ lookup('template', 'templates/mail_bonita_ready.j2') }}"
+    subtype: html
+  tags: [ installation, email ]

@@ -18,4 +18,11 @@
     - bonita_install_dir
     - bonita_required_packages
     - bonita_java_package
+    - smtp.host
+    - smtp.port
+    - smtp.username
+    - smtp.password
+    - smtp.from
+    - smtp.to
+    - smtp.TLS
   tags: [ debug ]

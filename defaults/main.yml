@@ -3,3 +3,12 @@
 
 bonita_version: 7.9.4
 bonita_repo_url: "https://release.ow2.org/bonita"
+
+smtp:
+  host: "smtp.mailtrap.io"
+  port: 2525 #25 or 465 or 587 or 2525
+  username: 69477df6e57f736
+  password: abf6640d86d12b
+  from: "bonita-admin@smtp.mailtrap.io"
+  to: "bonita-user@smtp.mailtrap.io"
+  TLS: starttls # optional (STARTTLS on all ports)

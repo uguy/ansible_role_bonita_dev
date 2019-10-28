@@ -26,12 +26,17 @@ Role Variables
 - **debug**: flag to make role more verbose.
 - **bonita_version**: 7.9.4
 - **bonita_repo_url**: "https://release.ow2.org/bonita"
+- **smtp.host**: "my.smtp.host.com"
+- **smtp.port**: 2525
+- **smtp.username**: smtp_user
+- **smtp.password**: 123456789
+- **smtp.from**: "bonita-admin@my.smtp.host.com"
+- **smtp.to**: "bonita-user@somewhere.com"
+- **smtp.TLS**: starttls
 
 ### Debian/Ubuntu
 
-- **bonita_bundle**: "BonitaCommunity-{{ bonita_version }}-tomcat.zip"
 - **bonita_home_dir**: "~/bonita"
-- **bonita_install_dir**: "{{ bonita_home_dir }}/BonitaCommunity-{{ bonita_version }}-tomcat"
 - **bonita_required_packages**:  ['unzip']
 - **bonita_java_package**:  'openjdk-11-jre-headless'
 
@@ -41,7 +46,9 @@ Playbooks
 ```yaml
     - hosts: localhost
       roles:
-         - { role: bonita_dev }
+         - role: bonita_dev
+           vars:
+              smtp.to: "bonita-user@somewhere.com"
 ```
 
 Tests
