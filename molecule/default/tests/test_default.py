@@ -12,6 +12,7 @@ def test_java_installed(host):
     assert java_version.rc == 0
 
 
-# def test_bonita_home_dir(host):
-#     f = host.file('~/bonita')
-#     assert f.exists
+def test_bonita_home_dir(host):
+    home_folder = host.user().home
+    f = host.file(home_folder + '/bonita')
+    assert f.exists
