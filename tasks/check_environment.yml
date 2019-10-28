@@ -18,6 +18,11 @@
   set_fact:
     java_installed={{ not java_task_installed.changed }}
 
+- name: fail if java not found
+  fail:
+    msg: "Bonita server require java, ensure a proper java version is available on your system."
+  when: not java_installed
+
 - name: determine which Java version is installed
   shell: |
     set -o pipefail |
