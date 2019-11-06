@@ -18,11 +18,11 @@
     - bonita_install_dir
     - bonita_initialized_marker_file
     - bonita_required_packages
-    - smtp.host
-    - smtp.port
-    - smtp.username
-    - smtp.password
-    - smtp.from
-    - smtp.to
-    - smtp.TLS
+    - smtp_host
+    - smtp_port
+    - smtp_username
+    - smtp_password
+    - smtp_from
+    - smtp_to
+    - smtp_TLS
   tags: [ debug ]
