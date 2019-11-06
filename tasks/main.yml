@@ -37,14 +37,14 @@
 
 - name: Sending email with new password
   mail:
-    host: "{{ smtp.host }}"
-    port: "{{ smtp.port }}"
-    username: "{{ smtp.username }}"
-    password: "{{ smtp.password }}"
-    secure: "{{ smtp.TLS }}"
-    sender: "{{ smtp.from }}"
-    to: "{{ smtp.to }}"
-    subject: "Your Bonita Plateform is up"
+    host: "{{ smtp_host }}"
+    port: "{{ smtp_port }}"
+    username: "{{ smtp_username }}"
+    password: "{{ smtp_password }}"
+    secure: "{{ smtp_TLS }}"
+    sender: "{{ smtp_from }}"
+    to: "{{ smtp_to }}"
+    subject: "Your Bonita Platform is up"
     body: "{{ lookup('template', 'templates/mail_bonita_ready.j2') }}"
     subtype: html
   tags: [ installation, email ]

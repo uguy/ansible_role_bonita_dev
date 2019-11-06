@@ -26,13 +26,13 @@ Role Variables
 - **debug**: flag to make role more verbose.
 - **bonita_version**: 7.9.4
 - **bonita_repo_url**: "https://release.ow2.org/bonita"
-- **smtp.host**: "my.smtp.host.com"
-- **smtp.port**: 2525
-- **smtp.username**: smtp_user
-- **smtp.password**: 123456789
-- **smtp.from**: "bonita-admin@my.smtp.host.com"
-- **smtp.to**: "bonita-user@somewhere.com"
-- **smtp.TLS**: starttls
+- **smtp_host**: "my.smtp.host.com"
+- **smtp_port**: 2525
+- **smtp_username**: smtp_user
+- **smtp_password**: 123456789
+- **smtp_from**: "bonita-admin@my.smtp.host.com"
+- **smtp_to**: "bonita-user@somewhere.com"
+- **smtp_TLS**: starttls
 
 ### Debian/Ubuntu
 
@@ -47,13 +47,19 @@ Playbooks
       roles:
          - role: bonita_dev
            vars:
-              smtp.to: "bonita-user@somewhere.com"
+              smtp_to: "bonita-user@somewhere.com"
 ```
 
 Tests
 -----
 
+> Molecule is designed to aid in the development and testing of Ansible roles
+> -- <cite>[Molecule](https://molecule.readthedocs.io/en/stable/)</cite>
+
+Please, refer to the manual to install and use molecule.
+
 ```bash
+# Running the tests
 molecule test
 ```
 
